@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <aside class="sidebar">
+        <div class="logo-row">
+          <h1 class="branding">SillyDo.</h1>
+          <button id="sidebarBtn" type="button" class="btn icon">
+            <svg
+              id="sidebarIcon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 3V21M5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3Z"
+                stroke="#757575"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <!-- Nav -->
+        <nav class="nav-container">
+          <ul class="project-list default-projects" data-nav-list="default">
+            <li class="project-item">
+              <button type="button" class="btn btn-project-item" data-btn-project>
+                <svg
+                  id="generalIcon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18.3334 10H13.3334L11.6667 12.5H8.33335L6.66669 10H1.66669M18.3334 10V15C18.3334 15.442 18.1578 15.866 17.8452 16.1785C17.5326 16.4911 17.1087 16.6667 16.6667 16.6667H3.33335C2.89133 16.6667 2.4674 16.4911 2.15484 16.1785C1.84228 15.866 1.66669 15.442 1.66669 15V10M18.3334 10L15.4584 4.25834C15.3204 3.98067 15.1077 3.74699 14.8441 3.58358C14.5806 3.42017 14.2768 3.33351 13.9667 3.33334H6.03335C5.72328 3.33351 5.41941 3.42017 5.15589 3.58358C4.89237 3.74699 4.67967 3.98067 4.54169 4.25834L1.66669 10"
+                    stroke="#2c2c2c"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+
+                <span>General</span>
+              </button>
+            </li>
+          </ul>
+          <!-- user projects -->
+          <div class="user-projects-container">
+            <h3>Projects</h3>
+            <ul class="project-list user-projects" data-nav-list="user">
+              <li class="project-item">
+                <button type="button" class="btn btn-project-item" data-btn-project>
+                  <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12.6 0.159999L9.96 16H8.328L10.968 0.159999H12.6ZM13.8 10.096V11.56H0.48V10.096H13.8ZM6.984 0.159999L4.344 16H2.712L5.352 0.159999H6.984ZM14.856 4.576V6.04H1.536V4.576H14.856Z"
+                      fill="black"
+                    />
+                  </svg>
+                  <span>React</span>
+                </button>
+              </li>
+            </ul>
+            <form action="#" data-form="add-project" class="add-project-form">
+              <div class="form-group">
+                <input type="text" placeholder="Project title" data-input="project-title" />
+                <button type="button" class="btn" data-btn="add-project">+</button>
+              </div>
+            </form>
+          </div>
+        </nav>
+      </aside>
+      <!-- TaskArea -->
+      <section class="main">
+        <div class="task-area">
+          <div class="task-area-project-title-row">
+            <h2 class="task-area-project-title">General</h2>
+            <button type="button" class="btn btn-primary-red" id="g1" data-btn="add-task">+ Add task</button>
+          </div>
+          <ul class="task-list">
+            <li class="task-item task-medium" id="7668c49f-ba5f-484b-8e14-4438d5cd2e31">
+              <input type="checkbox" />
+              <div class="task-content">
+                <span class="task-title">Call Person at 9 AM</span>
+                <span class="task-details">Pamper her, love her. Give her all your attention.</span>
+                <span class="task-due">Due : 28 May, 2025</span>
+              </div>
+              <button class="btn btn-task-edit" data-btn="task-edit">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 16.6667H17.5M13.75 2.91666C14.0815 2.58514 14.5312 2.3989 15 2.3989C15.2321 2.3989 15.462 2.44462 15.6765 2.53346C15.891 2.6223 16.0858 2.75251 16.25 2.91666C16.4142 3.08081 16.5444 3.27569 16.6332 3.49017C16.722 3.70464 16.7678 3.93452 16.7678 4.16666C16.7678 4.39881 16.722 4.62868 16.6332 4.84316C16.5444 5.05763 16.4142 5.25251 16.25 5.41666L5.83333 15.8333L2.5 16.6667L3.33333 13.3333L13.75 2.91666Z"
+                    stroke="#757575"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <!-- TaskModal -->
+      <dialog class="task-modal" data-modal="add-task">
+        <div class="task-modal-content">
+          <h3 class="modal-title">Add new task</h3>
+          <form action="#" method="dialog" class="task-modal-form" data-form="add-task">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" minlength="3" autofocus required />
+            </div>
+            <div class="form-group">
+              <label for="details">Details</label>
+              <textarea name="details" id="details" rows="2"></textarea>
+            </div>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="due">Due</label>
+                <input type="date" name="due" id="due" required />
+              </div>
+              <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                  <option value="" selected disabled>Choose</option>
+                  <option value="low">🔵 Low</option>
+                  <option value="medium">🟠 Medium</option>
+                  <option value="high">🔴 High</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group form-actions">
+              <button type="button" class="btn modal-close-btn" data-btn="modal-close">× Close</button>
+              <button type="submit" class="btn btn-primary-red" data-btn="submit-form">+ Add</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+    </main>
+  </body>
+</html>
