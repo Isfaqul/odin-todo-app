@@ -201,14 +201,14 @@ li {
 
 .main {
   display: flex;
+  padding: 2em;
 }
 
 .task-area {
-  margin-top: 6em;
+  margin-top: 3em;
   margin-inline: auto;
   width: 100%;
   max-width: 800px;
-  /* border: 1px solid rgba(200, 200, 200, 0.2); */
 }
 
 .task-area-project-title-row {
@@ -233,9 +233,10 @@ li {
   display: flex;
   align-items: flex-start;
   gap: 1em;
-  margin-bottom: 0.5em;
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 1px 2px 0 var(--gray-300);
+  margin-bottom: 1em;
+  border: 1px solid var(--gray-300);
+  border-left: 7px solid var(--gray-300);
+  /* box-shadow: 0 1px 2px 0 var(--gray-300); */
 
   .task-content {
     * {
@@ -246,6 +247,8 @@ li {
 
     .task-title {
       display: block;
+      font-weight: 400;
+      color: var(--body-txt);
     }
 
     .task-due {

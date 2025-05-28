@@ -1,7 +1,15 @@
-export default function Utils() {
-  function generateID() {
+let Utils = {
+  generateID() {
     return crypto.randomUUID();
-  }
+  },
 
-  return { generateID };
-}
+  clearContainer(container) {
+    container.innerHTML = "";
+  },
+
+  removeClass(className, element) {
+    element.classList.remove(className);
+  },
+};
+
+export default Utils;

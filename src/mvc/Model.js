@@ -5,7 +5,24 @@ export default function Model() {
     {
       id: "general",
       title: "General",
-      tasks: [],
+      tasks: [
+        {
+          id: "t1",
+          title: "Call her",
+          detail: "Ask about the eye situation",
+          due: "28 May, 25",
+          priority: "high",
+          isComplete: false,
+        },
+        {
+          id: "t2",
+          title: "Make Noodles",
+          detail: "Ask about the eye situation",
+          due: "29 May, 25",
+          priority: "",
+          isComplete: false,
+        },
+      ],
     },
   ];
 
@@ -13,8 +30,21 @@ export default function Model() {
     defaultProjects: DEFAULT_PROJECTS,
     userProjects: [
       {
-        id: "test",
-        title: "Test",
+        id: "one",
+        title: "One",
+        tasks: [
+          {
+            id: "t2",
+            title: "Complete Todo Project",
+            detail: "",
+            due: "29 May, 25",
+            isComplete: false,
+          },
+        ],
+      },
+      {
+        id: "two",
+        title: "Two",
         tasks: [],
       },
     ],
@@ -60,10 +90,10 @@ export default function Model() {
   function getTasksFromProject(projectID) {
     // Gets tasks from a particular project
     if (projectID === "general") {
-      return defaultProjects.filter((project) => project.id === "general")[0];
+      return defaultProjects.filter((project) => project.id === "general")[0].tasks;
     }
 
-    return userProjects.filter((project) => project.id === projectID)[0];
+    return userProjects.filter((project) => project.id === projectID)[0].tasks;
   }
 
   function getProjectTaskArray(id) {
@@ -76,6 +106,15 @@ export default function Model() {
     return userProjects.filter((project) => project.id === id)[0].tasks;
   }
 
+  function getProject(id) {
+    // Get the task project using ID
+    if (id === "general") {
+      return defaultProjects.filter((project) => project.id === "general")[0];
+    }
+
+    return userProjects.filter((project) => project.id === id)[0];
+  }
+
   function removeProject(id) {
     if (id === "general") return;
 
@@ -85,7 +124,7 @@ export default function Model() {
   function addTask(projectID, taskObj) {
     let newTask = {
       ...taskObj,
-      id: Utils().generateID(),
+      id: Utils.generateID(),
       isComplete: false,
     };
 
@@ -126,5 +165,6 @@ export default function Model() {
     completeTask,
     updateTask,
     removeTask,
+    getProject,
   };
 }
