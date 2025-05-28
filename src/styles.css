@@ -432,3 +432,43 @@ li {
     }
   }
 }
+/* Custom ChecBox Style */
+
+input[type="checkbox"].custom-round {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--gray-400);
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s;
+  outline: none;
+  overflow: hidden;
+}
+
+input[type="checkbox"].custom-round:checked {
+  border-color: var(--red-300);
+  background: var(--red-300);
+}
+
+input[type="checkbox"].custom-round::after {
+  content: "";
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 100ms;
+}
+
+input[type="checkbox"].custom-round:checked::after {
+  background: var(--red-300);
+  box-shadow: 0 0 0 0.3em var(--red-300) inset;
+}

@@ -101,7 +101,7 @@ export default function View() {
 
     if (!task.isComplete) {
       li.innerHTML = `
-      <input type="checkbox" data-input="check-task"/>
+      <input type="checkbox" class="custom-round" data-input="check-task"/>
         <div class="task-content">
           <span class="task-title">${task.title}</span>
           <span class="task-details">${task.detail}</span>
