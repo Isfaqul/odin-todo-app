@@ -236,6 +236,7 @@ li {
   margin-bottom: 1em;
   border: 1px solid var(--gray-300);
   border-left: 7px solid var(--gray-300);
+  overflow: hidden;
   /* box-shadow: 0 1px 2px 0 var(--gray-300); */
 
   .task-content {
@@ -259,7 +260,7 @@ li {
     .task-details {
       font-size: 1.5rem;
       margin-top: 0.3em;
-      color: var(--gray-300);
+      color: var(--gray-500);
       display: none;
     }
 
@@ -268,17 +269,50 @@ li {
     }
   }
 
-  .btn-task-edit {
+  .task-item-actions {
+    height: 100%;
     position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    background-color: transparent;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--gray-300);
+
+    * {
+      flex: 1;
+    }
+  }
+
+  .btn-task-action {
     padding: 0 0.5em;
     font-size: 1.6rem;
     border: none;
     cursor: pointer;
+  }
+
+  .btn-task-action.btn-task-remove {
+    background-color: transparent;
+    color: var(--red-500);
+    border-bottom: 1px solid var(--gray-300);
+    border-radius: none;
+    font-size: 2rem;
+
+    &:hover {
+      path {
+        stroke: var(--red-200);
+      }
+    }
+
+    &:active {
+      path {
+        stroke: var(--red-500);
+      }
+    }
+  }
+
+  .btn-task-action.btn-task-edit {
+    background-color: transparent;
 
     &:hover {
       path {
@@ -292,6 +326,12 @@ li {
       }
     }
   }
+
+  /* &:hover {
+    .task-details {
+      display: block;
+    }
+  } */
 }
 
 /* Task Priority Coloring */
