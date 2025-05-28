@@ -1,0 +1,130 @@
+import Utils from "../utils/utils";
+
+export default function Model() {
+  const DEFAULT_PROJECTS = [
+    {
+      id: "general",
+      title: "General",
+      tasks: [],
+    },
+  ];
+
+  let data = {
+    defaultProjects: DEFAULT_PROJECTS,
+    userProjects: [
+      {
+        id: "test",
+        title: "Test",
+        tasks: [],
+      },
+    ],
+  };
+
+  let { defaultProjects, userProjects } = data;
+
+  function getAllProjectList() {
+    // Get a list of all projects
+    // Custom and Default with id & title only
+    let list = [];
+    for (let projects of Object.values(data)) {
+      for (let project of projects) {
+        let id = project.id;
+        let title = project.title;
+        list.push({ id, title });
+      }
+    }
+
+    return list;
+  }
+
+  function getUserProjects() {
+    // Returns userProjects list as is
+    return userProjects;
+  }
+
+  function getDefaultProjects() {
+    // Returns defaultProjects list as is
+    return defaultProjects;
+  }
+
+  function addProject(projectObj) {
+    let project = {
+      ...projectObj,
+      id: Utils.generateID(),
+      tasks: [],
+    };
+
+    userProjects.push(project);
+  }
+
+  function getTasksFromProject(projectID) {
+    // Gets tasks from a particular project
+    if (projectID === "general") {
+      return defaultProjects.filter((project) => project.id === "general")[0];
+    }
+
+    return userProjects.filter((project) => project.id === projectID)[0];
+  }
+
+  function getProjectTaskArray(id) {
+    // Get the reference to the taskList from any project given it's id
+
+    if (id === "general") {
+      return defaultProjects.filter((project) => project.id === "general")[0].tasks;
+    }
+
+    return userProjects.filter((project) => project.id === id)[0].tasks;
+  }
+
+  function removeProject(id) {
+    if (id === "general") return;
+
+    userProjects = userProjects.filter((project) => project.id !== id);
+  }
+
+  function addTask(projectID, taskObj) {
+    let newTask = {
+      ...taskObj,
+      id: Utils().generateID(),
+      isComplete: false,
+    };
+
+    const project = getProjectTaskArray(projectID); // Get reference
+    project.push(newTask);
+  }
+
+  function completeTask(projectID, taskID) {
+    const tasks = getProjectTaskArray(projectID);
+    tasks = tasks.map((task) => {
+      if (task.id !== taskID) return task;
+      else return { ...task, isComplete: true };
+    });
+  }
+
+  function updateTask(projectID, taskID, updatedTaskObj) {
+    const tasks = getProjectTaskArray(projectID);
+    tasks = tasks.map((task) => {
+      if (task.id !== taskID) return task;
+      else return { ...updatedTaskObj };
+    });
+  }
+
+  function removeTask(projectID, taskID) {
+    const tasks = getProjectTaskArray(projectID);
+    tasks = tasks.filter((task) => task.id !== taskID);
+  }
+
+  return {
+    getAllProjectList,
+    getUserProjects,
+    getDefaultProjects,
+    addProject,
+    removeProject,
+    getTasksFromProject,
+    getProjectTaskArray,
+    addTask,
+    completeTask,
+    updateTask,
+    removeTask,
+  };
+}
