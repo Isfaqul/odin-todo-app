@@ -1,5 +1,6 @@
 import { projectEl, taskAreaEl, projectFormEl, taskModalEl } from "../utils/elements";
 import Utils from "../utils/utils";
+import { format } from "date-fns";
 
 export default function View() {
   function renderProjectList(projects) {
@@ -86,7 +87,7 @@ export default function View() {
               <div class="task-content">
                 <span class="task-title">${task.title}</span>
                 <span class="task-details">${task.detail}</span>
-                <span class="task-due">Due : ${task.due}</span>
+                <span class="task-due">Due : ${Utils.formatDate(task.due)}</span>
               </div>
               <div class="task-item-actions">
                 <button class="btn btn-task-action btn-task-remove" data-btn="task-remove">
@@ -206,13 +207,15 @@ export default function View() {
     const due = this.querySelector("#due").value;
     const priority = this.querySelector("#priority").value;
 
-    if (title.trim() && due) {
+    if (title.trim() && Utils.isValidDate(due)) {
       const event = new CustomEvent("taskFormSubmit", {
         detail: { title, detail, due, priority },
       });
 
       document.dispatchEvent(event);
       taskModalEl.form.reset();
+    } else {
+      alert("Date must not be in the past");
     }
   }
 
