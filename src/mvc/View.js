@@ -226,5 +226,35 @@ export default function View() {
     taskModalEl.modal.close();
   }
 
+  // Listen for TaskRemove
+  taskAreaEl.taskAreaContainer.addEventListener("click", handleTaskRemove);
+
+  function handleTaskRemove(e) {
+    const target = e.target.closest("[data-btn='task-remove']");
+
+    if (target) {
+      const event = new CustomEvent("taskRemove", {
+        detail: target.closest(".task-item").id,
+      });
+
+      document.dispatchEvent(event);
+    }
+  }
+
+  // Listen for editTask
+  taskAreaEl.taskAreaContainer.addEventListener("click", handleTaskEdit);
+
+  function handleTaskEdit(e) {
+    const target = e.target.closest("[data-btn='task-edit']");
+
+    if (target) {
+      const event = new CustomEvent("taskEdit", {
+        detail: target.closest(".task-item").id,
+      });
+
+      document.dispatchEvent(event);
+    }
+  }
+
   return { renderProjects, renderTasks, renderTaskArea, showModal, closeModal };
 }

@@ -289,13 +289,13 @@ li {
     font-size: 1.6rem;
     border: none;
     cursor: pointer;
+    border-radius: 0px;
   }
 
   .btn-task-action.btn-task-remove {
     background-color: transparent;
     color: var(--red-500);
     border-bottom: 1px solid var(--gray-300);
-    border-radius: none;
     font-size: 2rem;
 
     &:hover {

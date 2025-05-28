@@ -31,10 +31,6 @@ export default function Controller() {
   function handleProjectAddition(e) {
     const newProject = model.addProject(e.detail);
     view.renderProjects(model.getAllProjectList());
-
-    // // Render latest project
-    // view.renderTaskArea(model.getProject(newProject.id));
-    // view.renderTasks(model.getTasksFromProject(newProject.id));
   }
 
   // Listen for AddTaskBtn Click
@@ -51,6 +47,14 @@ export default function Controller() {
   function handleTaskAddition(e) {
     model.addTask(currentTabID, e.detail);
 
+    view.renderTasks(model.getTasksFromProject(currentTabID));
+  }
+
+  // Listen For TaskRemoval
+  document.addEventListener("taskRemove", handleTaskRemoval);
+
+  function handleTaskRemoval(e) {
+    model.removeTask(currentTabID, e.detail);
     view.renderTasks(model.getTasksFromProject(currentTabID));
   }
 }

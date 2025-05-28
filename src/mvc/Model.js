@@ -135,7 +135,7 @@ export default function Model() {
   }
 
   function completeTask(projectID, taskID) {
-    const tasks = getProjectTaskArray(projectID);
+    let tasks = getProjectTaskArray(projectID);
     tasks = tasks.map((task) => {
       if (task.id !== taskID) return task;
       else return { ...task, isComplete: true };
@@ -143,7 +143,7 @@ export default function Model() {
   }
 
   function updateTask(projectID, taskID, updatedTaskObj) {
-    const tasks = getProjectTaskArray(projectID);
+    let tasks = getProjectTaskArray(projectID);
     tasks = tasks.map((task) => {
       if (task.id !== taskID) return task;
       else return { ...updatedTaskObj };
@@ -151,8 +151,8 @@ export default function Model() {
   }
 
   function removeTask(projectID, taskID) {
-    const tasks = getProjectTaskArray(projectID);
-    tasks = tasks.filter((task) => task.id !== taskID);
+    let project = getProject(projectID);
+    project.tasks = project.tasks.filter((task) => task.id !== taskID);
   }
 
   return {
