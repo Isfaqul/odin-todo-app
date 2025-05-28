@@ -9,7 +9,7 @@ export default function Controller() {
   let currentEditTaskID = null;
 
   function init() {
-    view.renderProjects(model.getAllProjectList());
+    view.renderProjectList(model.getAllProjectList());
     view.renderTaskArea(model.getProject("general"));
     view.renderTasks(model.getTasksFromProject("general"));
     currentTabID = "general";
@@ -32,7 +32,16 @@ export default function Controller() {
 
   function handleProjectAddition(e) {
     const newProject = model.addProject(e.detail);
-    view.renderProjects(model.getAllProjectList());
+
+    currentTabID = newProject.id;
+    view.renderTaskArea(model.getProject(currentTabID));
+    view.renderProjectList(model.getAllProjectList());
+
+    // remove active classes from all other tabs
+    view.removeActiveClassFromProjectListItems();
+    // add active class to the newly created project tab
+    let el = view.getElementWithId(currentTabID);
+    view.addActiveClassOnProjectListItem(el);
   }
 
   // Listen for AddTaskBtn Click

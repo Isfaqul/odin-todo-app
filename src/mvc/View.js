@@ -2,7 +2,7 @@ import { projectEl, taskAreaEl, projectFormEl, taskModalEl } from "../utils/elem
 import Utils from "../utils/utils";
 
 export default function View() {
-  function renderProjects(projects) {
+  function renderProjectList(projects) {
     // Clear containers
     Utils.clearContainer(projectEl.defaultProjects);
     Utils.clearContainer(projectEl.userProjects);
@@ -279,12 +279,19 @@ export default function View() {
     }
   }
 
+  function getElementWithId(id) {
+    return document.getElementById(id);
+  }
+
   return {
-    renderProjects,
+    renderProjectList,
     renderTasks,
     renderTaskArea,
     showModal,
     closeModal,
     populateFormWithTask,
+    removeActiveClassFromProjectListItems,
+    addActiveClassOnProjectListItem,
+    getElementWithId,
   };
 }

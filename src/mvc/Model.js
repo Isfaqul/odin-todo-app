@@ -37,6 +37,7 @@ export default function Model() {
             id: "t2",
             title: "Complete Todo Project",
             detail: "",
+            priority: "",
             due: "2025-05-28",
             isComplete: false,
           },
