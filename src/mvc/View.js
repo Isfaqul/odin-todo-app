@@ -206,7 +206,7 @@ export default function View() {
     const due = this.querySelector("#due").value;
     const priority = this.querySelector("#priority").value;
 
-    if (title.trim() && detail.trim() && due) {
+    if (title.trim() && due) {
       const event = new CustomEvent("taskFormSubmit", {
         detail: { title, detail, due, priority },
       });
@@ -214,6 +214,50 @@ export default function View() {
       document.dispatchEvent(event);
       taskModalEl.form.reset();
     }
+  }
+
+  function renderModal(mode = "new") {
+    let div = document.createElement("div");
+    div.classList.add("task-modal-content");
+
+    taskModalEl.modal.innerHTML = "";
+
+    div.innerHTML = `
+    <h3 class="modal-title">${mode === "new" ? "Add new task" : "Edit task"}</h3>
+          <form action="#" method="dialog" class="task-modal-form" data-form="add-task">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" minlength="3" autofocus required />
+            </div>
+            <div class="form-group">
+              <label for="details">Details</label>
+              <textarea name="details" id="details" rows="2"></textarea>
+            </div>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="due">Due</label>
+                <input type="date" name="due" id="due" required />
+              </div>
+              <div class="form-group">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority">
+                  <option value="" selected disabled>Choose</option>
+                  <option value="low">🔵 Low</option>
+                  <option value="medium">🟠 Medium</option>
+                  <option value="high">🔴 High</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group form-actions">
+              <button type="button" class="btn modal-close-btn" data-btn="modal-close">× Close</button>
+              <button type="submit" class="btn btn-primary-red" data-btn="submit-form">${
+                mode === "new" ? "+ Add" : "☑️ Update"
+              }</button>
+            </div>
+          </form>
+    `;
+
+    taskModalEl.modal.appendChild(div);
   }
 
   function showModal() {
@@ -256,5 +300,5 @@ export default function View() {
     }
   }
 
-  return { renderProjects, renderTasks, renderTaskArea, showModal, closeModal };
+  return { renderProjects, renderTasks, renderTaskArea, showModal, closeModal, renderModal };
 }
