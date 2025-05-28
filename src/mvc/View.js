@@ -99,8 +99,6 @@ export default function View() {
     if (task.isComplete) li.classList.add("task-completed");
     li.id = task.id;
 
-    console.log(task);
-
     if (!task.isComplete) {
       li.innerHTML = `
       <input type="checkbox" data-input="check-task"/>

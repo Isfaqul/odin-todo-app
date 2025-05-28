@@ -5,7 +5,24 @@ export default function Model() {
     {
       id: "general",
       title: "General",
-      tasks: [],
+      tasks: [
+        {
+          id: "t1",
+          title: "Set up your projects",
+          detail: "Create your projects from the sidebar",
+          isComplete: false,
+          priority: "low",
+          due: "28 Dec 2030",
+        },
+        {
+          id: "t2",
+          title: "Click on me to see the details",
+          detail: "Your details will show here",
+          isComplete: false,
+          priority: "",
+          due: "28 Dec 2030",
+        },
+      ],
     },
     {
       id: "completed",
@@ -18,23 +35,18 @@ export default function Model() {
     defaultProjects: DEFAULT_PROJECTS,
     userProjects: [
       {
-        id: "one",
-        title: "One",
+        id: "p1",
+        title: "Daily Tasks",
         tasks: [
           {
-            id: "t2",
-            title: "Complete Todo Project",
-            detail: "",
-            priority: "",
-            due: "2025-05-28",
+            id: "t3",
+            title: "Brush your teeth",
+            detail: "Remember to Floss Floss Floss",
             isComplete: false,
+            priority: "",
+            due: "28 Dec 2030",
           },
         ],
-      },
-      {
-        id: "two",
-        title: "Two",
-        tasks: [],
       },
     ],
   };
