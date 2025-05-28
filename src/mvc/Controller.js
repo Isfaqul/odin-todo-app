@@ -96,9 +96,10 @@ export default function Controller() {
 
   function handleTaskCompletion(e) {
     model.completeTask(currentTabID, e.detail);
+    const RENDER_DELAY = 200;
 
     setTimeout(() => {
       view.renderTasks(model.getTasksFromProject(currentTabID));
-    }, 200);
+    }, RENDER_DELAY);
   }
 }

@@ -19,6 +19,7 @@
   --green-300: #25933e;
 
   --blue-200: #6ebde2;
+  --blue-300: #238fc1;
 
   --orange-200: #ff9d5f;
 
@@ -232,7 +233,7 @@ li {
   background-color: var(--gray-50);
   display: flex;
   align-items: flex-start;
-  gap: 1em;
+  gap: 1.5em;
   margin-bottom: 1em;
   border: 1px solid var(--gray-300);
   border-left: 7px solid var(--gray-300);
@@ -241,6 +242,30 @@ li {
   input {
     border-radius: 2em;
     cursor: pointer;
+
+    /* Custom styles */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--gray-400);
+    border-radius: 50%;
+    background: var(--white);
+    cursor: pointer;
+    position: relative;
+    transition: border-color background 100ms;
+    outline: none;
+    overflow: hidden;
+    bottom: 1px;
+
+    &:hover {
+      border-color: var(--blue-300);
+    }
+
+    &:checked {
+      border-color: var(--blue-300);
+      background: var(--blue-200);
+    }
   }
 
   .task-content {
@@ -431,44 +456,4 @@ li {
       background-color: var(--gray-400);
     }
   }
-}
-/* Custom ChecBox Style */
-
-input[type="checkbox"].custom-round {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 22px;
-  height: 22px;
-  border: 2px solid var(--gray-400);
-  border-radius: 50%;
-  background: var(--white);
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.2s;
-  outline: none;
-  overflow: hidden;
-}
-
-input[type="checkbox"].custom-round:checked {
-  border-color: var(--red-300);
-  background: var(--red-300);
-}
-
-input[type="checkbox"].custom-round::after {
-  content: "";
-  display: block;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--white);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: background 100ms;
-}
-
-input[type="checkbox"].custom-round:checked::after {
-  background: var(--red-300);
-  box-shadow: 0 0 0 0.3em var(--red-300) inset;
 }
