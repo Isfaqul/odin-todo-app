@@ -10,7 +10,7 @@ export default function Model() {
           id: "t1",
           title: "Call her",
           detail: "Ask about the eye situation",
-          due: "28 May, 25",
+          due: "2025-05-28",
           priority: "high",
           isComplete: false,
         },
@@ -18,7 +18,7 @@ export default function Model() {
           id: "t2",
           title: "Make Noodles",
           detail: "Ask about the eye situation",
-          due: "29 May, 25",
+          due: "2025-05-29",
           priority: "",
           isComplete: false,
         },
@@ -37,7 +37,7 @@ export default function Model() {
             id: "t2",
             title: "Complete Todo Project",
             detail: "",
-            due: "29 May, 25",
+            due: "2025-05-28",
             isComplete: false,
           },
         ],
@@ -143,11 +143,13 @@ export default function Model() {
   }
 
   function updateTask(projectID, taskID, updatedTaskObj) {
-    let tasks = getProjectTaskArray(projectID);
-    tasks = tasks.map((task) => {
+    let project = getProject(projectID);
+    project.tasks = project.tasks.map((task) => {
       if (task.id !== taskID) return task;
-      else return { ...updatedTaskObj };
+      else return { ...task, ...updatedTaskObj };
     });
+
+    console.log(data);
   }
 
   function removeTask(projectID, taskID) {

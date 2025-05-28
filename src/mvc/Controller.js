@@ -5,6 +5,8 @@ export default function Controller() {
   const model = Model();
   const view = View();
   let currentTabID;
+  let isEditing = false;
+  let currentEditTaskID = null;
 
   function init() {
     view.renderProjects(model.getAllProjectList());
@@ -37,15 +39,22 @@ export default function Controller() {
   document.addEventListener("addTaskClick", handleAddTaskClick);
 
   function handleAddTaskClick(e) {
-    view.showModal();
+    view.showModal("new");
   }
 
   // Listen for TaskFormSubmit
+  document.addEventListener("taskFormSubmit", handleTaskFormSubmit);
 
-  document.addEventListener("taskFormSubmit", handleTaskAddition);
+  function handleTaskFormSubmit(e) {
+    if (!isEditing) {
+      model.addTask(currentTabID, e.detail);
+    } else {
+      model.updateTask(currentTabID, currentEditTaskID, e.detail);
 
-  function handleTaskAddition(e) {
-    model.addTask(currentTabID, e.detail);
+      // Reset state
+      isEditing = false;
+      currentEditTaskID = null;
+    }
 
     view.renderTasks(model.getTasksFromProject(currentTabID));
   }
@@ -56,5 +65,20 @@ export default function Controller() {
   function handleTaskRemoval(e) {
     model.removeTask(currentTabID, e.detail);
     view.renderTasks(model.getTasksFromProject(currentTabID));
+  }
+
+  // Listen for TaskEdit
+  document.addEventListener("taskEdit", handleTaskEdit);
+
+  function handleTaskEdit(e) {
+    isEditing = true; // Turn on editing mode
+    currentEditTaskID = e.detail; // Set the id of the task being edited
+
+    // Fetch the task
+    const task = model.getTasksFromProject(currentTabID).filter((task) => task.id === e.detail)[0];
+
+    // Update view
+    view.populateFormWithTask(task);
+    view.showModal("edit");
   }
 }

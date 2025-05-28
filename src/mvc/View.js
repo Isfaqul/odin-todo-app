@@ -216,58 +216,37 @@ export default function View() {
     }
   }
 
-  function renderModal(mode = "new") {
-    let div = document.createElement("div");
-    div.classList.add("task-modal-content");
+  function showModal(mode) {
+    const modalTitle = document.querySelector(".modal-title");
+    const submitBtn = document.querySelector("[data-btn='submit-form']");
 
-    taskModalEl.modal.innerHTML = "";
+    if (mode === "new") {
+      taskModalEl.form.reset();
+      modalTitle.textContent = "Add new task";
+      submitBtn.textContent = "+ Add";
+    } else if (mode === "edit") {
+      modalTitle.textContent = "Edit task";
+      submitBtn.textContent = "Update";
+    }
 
-    div.innerHTML = `
-    <h3 class="modal-title">${mode === "new" ? "Add new task" : "Edit task"}</h3>
-          <form action="#" method="dialog" class="task-modal-form" data-form="add-task">
-            <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" name="title" id="title" minlength="3" autofocus required />
-            </div>
-            <div class="form-group">
-              <label for="details">Details</label>
-              <textarea name="details" id="details" rows="2"></textarea>
-            </div>
-            <div class="form-group-row">
-              <div class="form-group">
-                <label for="due">Due</label>
-                <input type="date" name="due" id="due" required />
-              </div>
-              <div class="form-group">
-                <label for="priority">Priority</label>
-                <select name="priority" id="priority">
-                  <option value="" selected disabled>Choose</option>
-                  <option value="low">🔵 Low</option>
-                  <option value="medium">🟠 Medium</option>
-                  <option value="high">🔴 High</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group form-actions">
-              <button type="button" class="btn modal-close-btn" data-btn="modal-close">× Close</button>
-              <button type="submit" class="btn btn-primary-red" data-btn="submit-form">${
-                mode === "new" ? "+ Add" : "☑️ Update"
-              }</button>
-            </div>
-          </form>
-    `;
-
-    taskModalEl.modal.appendChild(div);
-  }
-
-  function showModal() {
-    taskModalEl.form.reset();
     taskModalEl.modal.showModal();
   }
 
   function closeModal() {
     taskModalEl.form.reset();
     taskModalEl.modal.close();
+  }
+
+  function populateFormWithTask(task) {
+    const title = document.querySelector("#title");
+    const detail = document.querySelector("#details");
+    const due = document.querySelector("#due");
+    const priority = document.querySelector("#priority");
+
+    title.value = task.title;
+    detail.value = task.detail;
+    due.value = task.due;
+    priority.value = task.priority;
   }
 
   // Listen for TaskRemove
@@ -300,5 +279,12 @@ export default function View() {
     }
   }
 
-  return { renderProjects, renderTasks, renderTaskArea, showModal, closeModal, renderModal };
+  return {
+    renderProjects,
+    renderTasks,
+    renderTaskArea,
+    showModal,
+    closeModal,
+    populateFormWithTask,
+  };
 }
