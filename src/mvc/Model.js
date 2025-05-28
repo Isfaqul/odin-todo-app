@@ -31,7 +31,7 @@ export default function Model() {
     },
   ];
 
-  let data = {
+  let data = JSON.parse(localStorage.getItem("data")) || {
     defaultProjects: DEFAULT_PROJECTS,
     userProjects: [
       {
@@ -50,6 +50,8 @@ export default function Model() {
       },
     ],
   };
+
+  localStorage.getItem(data);
 
   let { defaultProjects, userProjects } = data;
 
@@ -87,6 +89,7 @@ export default function Model() {
 
     userProjects.push(project);
 
+    updateLocalStorage();
     return project;
   }
 
@@ -122,6 +125,8 @@ export default function Model() {
     if (["general", "completed"].includes(id)) return;
 
     userProjects = userProjects.filter((project) => project.id !== id);
+
+    updateLocalStorage();
   }
 
   function addTask(projectID, taskObj) {
@@ -133,6 +138,8 @@ export default function Model() {
 
     const project = getProjectTaskArray(projectID); // Get reference
     project.push(newTask);
+
+    updateLocalStorage();
   }
 
   function completeTask(projectID, taskID) {
@@ -149,6 +156,8 @@ export default function Model() {
 
     // Push the completed tasks to completedTasks array
     completedTasksProject.tasks.push({ ...completedTask, isComplete: true });
+
+    updateLocalStorage();
   }
 
   function updateTask(projectID, taskID, updatedTaskObj) {
@@ -157,11 +166,19 @@ export default function Model() {
       if (task.id !== taskID) return task;
       else return { ...task, ...updatedTaskObj };
     });
+
+    updateLocalStorage();
   }
 
   function removeTask(projectID, taskID) {
     let project = getProject(projectID);
     project.tasks = project.tasks.filter((task) => task.id !== taskID);
+
+    updateLocalStorage();
+  }
+
+  function updateLocalStorage() {
+    localStorage.setItem("data", JSON.stringify(data));
   }
 
   return {

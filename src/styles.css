@@ -248,22 +248,21 @@ li {
     -webkit-appearance: none;
     width: 22px;
     height: 22px;
-    border: 2px solid var(--gray-400);
+    border: 1px solid var(--gray-400);
     border-radius: 50%;
     background: var(--white);
     cursor: pointer;
     position: relative;
-    transition: border-color background 100ms;
+    transition: border background 100ms ease;
     outline: none;
     overflow: hidden;
     bottom: 1px;
 
     &:hover {
-      border-color: var(--blue-300);
+      border: 2px solid var(--blue-300);
     }
 
     &:checked {
-      border-color: var(--blue-300);
       background: var(--blue-200);
     }
   }
