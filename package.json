@@ -1,9 +1,10 @@
 {
-  "name": "todoer",
+  "name": "SillyDo",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "dev": "npx webpack serve"
+    "dev": "npx webpack serve",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
