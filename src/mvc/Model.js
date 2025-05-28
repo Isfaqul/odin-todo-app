@@ -85,6 +85,8 @@ export default function Model() {
     };
 
     userProjects.push(project);
+
+    return project;
   }
 
   function getTasksFromProject(projectID) {

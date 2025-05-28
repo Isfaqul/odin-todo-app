@@ -1,4 +1,4 @@
-import { projectEl, taskAreaEl } from "../utils/elements";
+import { projectEl, taskAreaEl, projectFormEl, taskModalEl } from "../utils/elements";
 import Utils from "../utils/utils";
 
 export default function View() {
@@ -52,7 +52,7 @@ export default function View() {
                 <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M12.6 0.159999L9.96 16H8.328L10.968 0.159999H12.6ZM13.8 10.096V11.56H0.48V10.096H13.8ZM6.984 0.159999L4.344 16H2.712L5.352 0.159999H6.984ZM14.856 4.576V6.04H1.536V4.576H14.856Z"
-                      fill="black"
+                      fill="gray"
                     />
                 </svg>
                 <span>${project.title}</span>
@@ -150,5 +150,65 @@ export default function View() {
     item.parentElement.classList.add("active");
   }
 
-  return { renderProjects, renderTasks, renderTaskArea };
+  // Listen for ProjectAddition
+  projectFormEl.submitBtn.addEventListener("click", handleProjectAddition);
+
+  function handleProjectAddition(e) {
+    let projectName = projectFormEl.input.value.trim();
+    if (projectName && projectName.length > 3) {
+      const event = new CustomEvent("projectAdd", {
+        detail: { title: projectName },
+      });
+
+      document.dispatchEvent(event);
+
+      // Clear input
+      projectFormEl.input.value = "";
+    }
+  }
+
+  // Listen for AddTask Btn
+  taskAreaEl.taskAreaContainer.addEventListener("click", handleAddTaskBtnClick);
+
+  function handleAddTaskBtnClick(e) {
+    let target = e.target.closest("[data-btn='add-task']");
+    if (target) {
+      const event = new CustomEvent("addTaskClick", {
+        detail: target.id,
+      });
+
+      document.dispatchEvent(event);
+    }
+  }
+
+  // Listen for ModalClose
+  taskModalEl.closeBtn.addEventListener("click", closeModal);
+
+  // Listen for TaskModalForm Submit
+  taskModalEl.form.addEventListener("submit", handleTaskFormSubmit);
+
+  function handleTaskFormSubmit(e) {
+    const title = this.querySelector("#title").value;
+    const detail = this.querySelector("#details").value;
+    const due = this.querySelector("#due").value;
+    const priority = this.querySelector("#priority").value;
+
+    if (title.trim() && detail.trim() && due) {
+      const event = new CustomEvent("taskFormSubmit", {
+        detail: { title, detail, due, priority },
+      });
+
+      document.dispatchEvent(event);
+    }
+  }
+
+  function showModal() {
+    taskModalEl.modal.showModal();
+  }
+
+  function closeModal() {
+    taskModalEl.modal.close();
+  }
+
+  return { renderProjects, renderTasks, renderTaskArea, showModal, closeModal };
 }

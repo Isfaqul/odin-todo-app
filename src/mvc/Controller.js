@@ -24,4 +24,33 @@ export default function Controller() {
     view.renderTaskArea(model.getProject(e.detail));
     view.renderTasks(model.getTasksFromProject(e.detail));
   }
+
+  // Listen for projecAddition event
+  document.addEventListener("projectAdd", handleProjectAddition);
+
+  function handleProjectAddition(e) {
+    const newProject = model.addProject(e.detail);
+    view.renderProjects(model.getAllProjectList());
+
+    // // Render latest project
+    // view.renderTaskArea(model.getProject(newProject.id));
+    // view.renderTasks(model.getTasksFromProject(newProject.id));
+  }
+
+  // Listen for AddTaskBtn Click
+  document.addEventListener("addTaskClick", handleAddTaskClick);
+
+  function handleAddTaskClick(e) {
+    view.showModal();
+  }
+
+  // Listen for TaskFormSubmit
+
+  document.addEventListener("taskFormSubmit", handleTaskAddition);
+
+  function handleTaskAddition(e) {
+    model.addTask(currentTabID, e.detail);
+
+    view.renderTasks(model.getTasksFromProject(currentTabID));
+  }
 }
