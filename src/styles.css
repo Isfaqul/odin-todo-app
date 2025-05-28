@@ -203,6 +203,8 @@ li {
 .main {
   display: flex;
   padding: 2em;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .task-area {
@@ -210,6 +212,10 @@ li {
   margin-inline: auto;
   width: 100%;
   max-width: 800px;
+
+  .task-list {
+    padding-bottom: 2em;
+  }
 }
 
 .task-area-project-title-row {
