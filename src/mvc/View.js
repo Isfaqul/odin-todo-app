@@ -300,6 +300,23 @@ export default function View() {
     }
   }
 
+  // Listen for clicks on the taskItems
+  taskAreaEl.taskAreaContainer.addEventListener("click", handleTaskExpand);
+
+  function handleTaskExpand(e) {
+    // Do not expand if check box and actioBtns are clicked
+    if (e.target.closest("[data-input='check-task']") || e.target.closest(".task-item-actions")) {
+      return;
+    }
+
+    let target = e.target.closest(".task-item");
+
+    if (target) {
+      const detail = target.querySelector(".task-details");
+      detail.classList.toggle("show");
+    }
+  }
+
   return {
     renderProjectList,
     renderTasks,

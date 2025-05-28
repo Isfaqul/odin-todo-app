@@ -330,12 +330,6 @@ li {
       }
     }
   }
-
-  /* &:hover {
-    .task-details {
-      display: block;
-    }
-  } */
 }
 
 /* Task Priority Coloring */
