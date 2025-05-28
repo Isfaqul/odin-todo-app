@@ -237,7 +237,11 @@ li {
   border: 1px solid var(--gray-300);
   border-left: 7px solid var(--gray-300);
   overflow: hidden;
-  /* box-shadow: 0 1px 2px 0 var(--gray-300); */
+
+  input {
+    border-radius: 2em;
+    cursor: pointer;
+  }
 
   .task-content {
     * {

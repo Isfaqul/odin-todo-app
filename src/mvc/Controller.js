@@ -90,4 +90,15 @@ export default function Controller() {
     view.populateFormWithTask(task);
     view.showModal("edit");
   }
+
+  // Listen for TaskCompleteChecked
+  document.addEventListener("taskComplete", handleTaskCompletion);
+
+  function handleTaskCompletion(e) {
+    model.completeTask(currentTabID, e.detail);
+
+    setTimeout(() => {
+      view.renderTasks(model.getTasksFromProject(currentTabID));
+    }, 200);
+  }
 }

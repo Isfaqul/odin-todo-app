@@ -82,7 +82,7 @@ export default function View() {
     li.id = task.id;
 
     li.innerHTML = `
-            <input type="checkbox" />
+            <input type="checkbox" data-input="check-task"/>
               <div class="task-content">
                 <span class="task-title">${task.title}</span>
                 <span class="task-details">${task.detail}</span>
@@ -281,6 +281,23 @@ export default function View() {
 
   function getElementWithId(id) {
     return document.getElementById(id);
+  }
+
+  // Listen for TaskCompletion
+  taskAreaEl.taskAreaContainer.addEventListener("change", handleTaskCompletion);
+
+  function handleTaskCompletion(e) {
+    let target = e.target.closest("[data-input='check-task']");
+
+    if (target) {
+      const id = target.closest(".task-item").id;
+
+      const event = new CustomEvent("taskComplete", {
+        detail: id,
+      });
+
+      document.dispatchEvent(event);
+    }
   }
 
   return {

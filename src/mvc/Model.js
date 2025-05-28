@@ -49,9 +49,10 @@ export default function Model() {
         tasks: [],
       },
     ],
+    completedTasks: [],
   };
 
-  let { defaultProjects, userProjects } = data;
+  let { defaultProjects, userProjects, completedTasks } = data;
 
   function getAllProjectList() {
     // Get a list of all projects
@@ -136,11 +137,14 @@ export default function Model() {
   }
 
   function completeTask(projectID, taskID) {
-    let tasks = getProjectTaskArray(projectID);
-    tasks = tasks.map((task) => {
+    let project = getProject(projectID);
+    project.tasks = project.tasks.map((task) => {
       if (task.id !== taskID) return task;
       else return { ...task, isComplete: true };
     });
+
+    removeTask(projectID, taskID);
+    console.log(data);
   }
 
   function updateTask(projectID, taskID, updatedTaskObj) {
@@ -149,8 +153,6 @@ export default function Model() {
       if (task.id !== taskID) return task;
       else return { ...task, ...updatedTaskObj };
     });
-
-    console.log(data);
   }
 
   function removeTask(projectID, taskID) {
