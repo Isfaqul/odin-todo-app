@@ -5,24 +5,12 @@ export default function Model() {
     {
       id: "general",
       title: "General",
-      tasks: [
-        {
-          id: "t1",
-          title: "Call her",
-          detail: "Ask about the eye situation",
-          due: "2025-05-28",
-          priority: "high",
-          isComplete: false,
-        },
-        {
-          id: "t2",
-          title: "Make Noodles",
-          detail: "Ask about the eye situation",
-          due: "2025-05-29",
-          priority: "",
-          isComplete: false,
-        },
-      ],
+      tasks: [],
+    },
+    {
+      id: "completed",
+      title: "Completed",
+      tasks: [],
     },
   ];
 
@@ -49,10 +37,9 @@ export default function Model() {
         tasks: [],
       },
     ],
-    completedTasks: [],
   };
 
-  let { defaultProjects, userProjects, completedTasks } = data;
+  let { defaultProjects, userProjects } = data;
 
   function getAllProjectList() {
     // Get a list of all projects
@@ -93,8 +80,8 @@ export default function Model() {
 
   function getTasksFromProject(projectID) {
     // Gets tasks from a particular project
-    if (projectID === "general") {
-      return defaultProjects.filter((project) => project.id === "general")[0].tasks;
+    if (["general", "completed"].includes(projectID)) {
+      return defaultProjects.filter((project) => project.id === projectID)[0].tasks;
     }
 
     return userProjects.filter((project) => project.id === projectID)[0].tasks;
@@ -103,8 +90,8 @@ export default function Model() {
   function getProjectTaskArray(id) {
     // Get the reference to the taskList from any project given it's id
 
-    if (id === "general") {
-      return defaultProjects.filter((project) => project.id === "general")[0].tasks;
+    if (["general", "completed"].includes(id)) {
+      return defaultProjects.filter((project) => project.id === id)[0].tasks;
     }
 
     return userProjects.filter((project) => project.id === id)[0].tasks;
@@ -112,15 +99,15 @@ export default function Model() {
 
   function getProject(id) {
     // Get the task project using ID
-    if (id === "general") {
-      return defaultProjects.filter((project) => project.id === "general")[0];
+    if (["general", "completed"].includes(id)) {
+      return defaultProjects.filter((project) => project.id === id)[0];
     }
 
     return userProjects.filter((project) => project.id === id)[0];
   }
 
   function removeProject(id) {
-    if (id === "general") return;
+    if (["general", "completed"].includes(id)) return;
 
     userProjects = userProjects.filter((project) => project.id !== id);
   }
@@ -138,13 +125,18 @@ export default function Model() {
 
   function completeTask(projectID, taskID) {
     let project = getProject(projectID);
-    project.tasks = project.tasks.map((task) => {
-      if (task.id !== taskID) return task;
-      else return { ...task, isComplete: true };
-    });
 
-    removeTask(projectID, taskID);
-    console.log(data);
+    // Get the completedTask
+    let completedTask = project.tasks.filter((task) => task.id === taskID)[0];
+
+    // Remove it from currentProjectList
+    project.tasks = project.tasks.filter((task) => task.id !== taskID);
+
+    // Get reference to completedTaskProject
+    let completedTasksProject = getProject("completed");
+
+    // Push the completed tasks to completedTasks array
+    completedTasksProject.tasks.push({ ...completedTask, isComplete: true });
   }
 
   function updateTask(projectID, taskID, updatedTaskObj) {

@@ -345,6 +345,10 @@ li {
   border-left: 7px solid var(--orange-200);
 }
 
+.task-item.task-completed {
+  opacity: 0.7;
+}
+
 /* Modal Styles */
 
 .task-modal {
