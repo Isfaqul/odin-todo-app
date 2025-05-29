@@ -259,7 +259,7 @@ li {
     background: var(--white);
     cursor: pointer;
     position: relative;
-    transition: border background 100ms ease;
+    transition: all 100ms ease;
     outline: none;
     overflow: hidden;
     bottom: 1px;
@@ -429,9 +429,21 @@ li {
 
     label,
     input,
-    select {
+    select,
+    textarea {
       font-size: 1.6rem;
       display: block;
+    }
+
+    input,
+    textarea {
+      border: 2px solid var(--gray-300);
+      border-radius: 0.2em;
+
+      &:focus {
+        outline: none;
+        border: 2px solid var(--blue-200);
+      }
     }
 
     label {

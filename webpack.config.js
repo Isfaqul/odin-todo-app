@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = {
   mode: "production",
@@ -31,7 +32,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader", options: { sourceMap: true } }],
       },
       {
         test: /\.html$/i,
