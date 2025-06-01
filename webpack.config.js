@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const postcssPresetEnv = require("postcss-preset-env");
 
 module.exports = {
   mode: "production",
