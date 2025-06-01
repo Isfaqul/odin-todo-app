@@ -53,8 +53,6 @@ export default function Model() {
 
   localStorage.getItem(data);
 
-  let { defaultProjects, userProjects } = data;
-
   function getAllProjectList() {
     // Get a list of all projects
     // Custom and Default with id & title only
@@ -72,12 +70,12 @@ export default function Model() {
 
   function getUserProjects() {
     // Returns userProjects list as is
-    return userProjects;
+    return data.userProjects;
   }
 
   function getDefaultProjects() {
     // Returns defaultProjects list as is
-    return defaultProjects;
+    return data.defaultProjects;
   }
 
   function addProject(projectObj) {
@@ -87,7 +85,7 @@ export default function Model() {
       tasks: [],
     };
 
-    userProjects.push(project);
+    data.userProjects.push(project);
 
     updateLocalStorage();
     return project;
@@ -96,36 +94,35 @@ export default function Model() {
   function getTasksFromProject(projectID) {
     // Gets tasks from a particular project
     if (["general", "completed"].includes(projectID)) {
-      return defaultProjects.filter((project) => project.id === projectID)[0].tasks;
+      return data.defaultProjects.filter((project) => project.id === projectID)[0].tasks;
     }
 
-    return userProjects.filter((project) => project.id === projectID)[0].tasks;
+    return data.userProjects.filter((project) => project.id === projectID)[0].tasks;
   }
 
   function getProjectTaskArray(id) {
     // Get the reference to the taskList from any project given it's id
 
     if (["general", "completed"].includes(id)) {
-      return defaultProjects.filter((project) => project.id === id)[0].tasks;
+      return data.defaultProjects.filter((project) => project.id === id)[0].tasks;
     }
 
-    return userProjects.filter((project) => project.id === id)[0].tasks;
+    return data.userProjects.filter((project) => project.id === id)[0].tasks;
   }
 
   function getProject(id) {
     // Get the task project using ID
     if (["general", "completed"].includes(id)) {
-      return defaultProjects.filter((project) => project.id === id)[0];
+      return data.defaultProjects.filter((project) => project.id === id)[0];
     }
 
-    return userProjects.filter((project) => project.id === id)[0];
+    return data.userProjects.filter((project) => project.id === id)[0];
   }
 
   function removeProject(id) {
     if (["general", "completed"].includes(id)) return;
 
-    userProjects = userProjects.filter((project) => project.id !== id);
-
+    data.userProjects = data.userProjects.filter((project) => project.id !== id);
     updateLocalStorage();
   }
 

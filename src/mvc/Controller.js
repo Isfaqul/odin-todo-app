@@ -44,6 +44,17 @@ export default function Controller() {
     view.addActiveClassOnProjectListItem(el);
   }
 
+  // ListenFor RemoveProject Click
+  document.addEventListener("projectRemove", handleProjectRemoval);
+
+  function handleProjectRemoval(e) {
+    model.removeProject(e.detail);
+    currentTabID = "general";
+    view.renderProjectList(model.getAllProjectList());
+    view.renderTaskArea(model.getProject(currentTabID));
+    view.renderTasks(model.getTasksFromProject(currentTabID));
+  }
+
   // Listen for AddTaskBtn Click
   document.addEventListener("addTaskClick", handleAddTaskClick);
 

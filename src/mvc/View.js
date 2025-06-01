@@ -74,6 +74,7 @@ export default function View() {
                 </svg>
                 <span>${project.title}</span>
             </button>
+            <button type="button" class="btn btn-project-remove" data-btn="project-remove">×</button>
         `;
     }
 
@@ -217,7 +218,7 @@ export default function View() {
 
   function handleProjectAddition(e) {
     let projectName = projectFormEl.input.value.trim();
-    if (projectName && projectName.length > 3) {
+    if (projectName && projectName.length > 2) {
       const event = new CustomEvent("projectAdd", {
         detail: { title: projectName },
       });
@@ -227,6 +228,21 @@ export default function View() {
       // Clear input
       projectFormEl.input.value = "";
     }
+  }
+
+  // Listen for project removal
+  sidebar.addEventListener("click", handleProjectRemove);
+
+  function handleProjectRemove(e) {
+    const target = e.target.closest("[data-btn='project-remove']");
+    if (!target) return;
+
+    const id = target.closest(".project-item").querySelector("[data-btn-project]").id;
+    const event = new CustomEvent("projectRemove", {
+      detail: id,
+    });
+
+    document.dispatchEvent(event);
   }
 
   // Listen for AddTask Btn
